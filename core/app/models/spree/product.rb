@@ -67,7 +67,7 @@ module Spree
     delegate :images, to: :master, prefix: true
     alias_method :images, :master_images
 
-    has_many :variant_images, -> { order(:position) }, source: :images, through: :variants_including_master
+    has_many :variant_images, -> { order(:position).uniq }, source: :images, through: :variants_including_master
 
     after_create :set_master_variant_defaults
     after_create :add_associations_from_prototype
