@@ -1382,3 +1382,5 @@ en:
     zipcode: Zip Code
     zone: Zone
     zones: Zones
+    all_variants: All
+    variant_placeholder: Select a variant

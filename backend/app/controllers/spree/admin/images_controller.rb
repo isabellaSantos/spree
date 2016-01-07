@@ -4,8 +4,8 @@ module Spree
       before_action :load_edit_data, except: :index
       before_action :load_index_data, only: :index
 
-      create.before :set_viewable
-      update.before :set_viewable
+      create.before :set_variants
+      update.before :set_variants
 
       private
 
@@ -29,10 +29,16 @@ module Spree
         @variants.insert(0, [Spree.t(:all), @product.master.id])
       end
 
-      def set_viewable
-        @image.viewable_type = 'Spree::Variant'
-        @image.viewable_id = params[:image][:viewable_id]
+      def set_variants
+        if params[:image].present? and params[:image][:variant_ids].present?
+          params[:image][:variant_ids] = params[:image][:variant_ids].split(',')
+        end
       end
+
+      # def set_viewable
+      #   @image.viewable_type = 'Spree::Variant'
+      #   @image.viewable_id = params[:image][:viewable_id]
+      # end
 
       def variant_index_includes
         [
@@ -44,6 +50,14 @@ module Spree
         [
           variants_including_master: { option_values: :option_type, images: :viewable }
         ]
+      end
+
+      def model_class
+        Spree::Image
+      end
+
+      def collection_url
+        admin_product_images_url(@product)
       end
     end
   end

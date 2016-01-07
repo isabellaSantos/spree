@@ -19,6 +19,7 @@
 //= require spree/backend/gateway
 //= require spree/backend/general_settings
 //= require spree/backend/handlebar_extensions
+//= require spree/backend/image_variant_ids
 //= require spree/backend/line_items
 //= require spree/backend/line_items_on_order_edit
 //= require spree/backend/nested-attribute

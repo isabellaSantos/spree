@@ -1,5 +1,8 @@
 module Spree
   class Image < Asset
+
+    has_and_belongs_to_many :variants, join_table: 'spree_images_variants', class_name: 'Spree::Variant'
+
     validate :no_attachment_errors
 
     has_attached_file :attachment,

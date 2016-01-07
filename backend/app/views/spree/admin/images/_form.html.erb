@@ -5,8 +5,10 @@
       <%= f.file_field :attachment %>
     </div>
     <div data-hook="variant" class="form-group">
-      <%= f.label :viewable_id, Spree::Variant.model_name.human %>
-      <%= f.select :viewable_id, @variants, {}, {:class => 'select2'} %>
+      <%= f.field_container :variants, class: ['form-group'] do %>
+          <%= f.label :variant_ids, Spree.t(:variants) %>
+          <%= f.hidden_field :variant_ids, value: @image.variant_ids.join(',') %>
+      <% end %>
     </div>
   </div>
   <div data-hook="alt_text" class="col-md-6">
@@ -16,3 +18,8 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  Spree.current_product_id = <%= @product.id %>;
+  new window.ImageVariantIds();
+</script>

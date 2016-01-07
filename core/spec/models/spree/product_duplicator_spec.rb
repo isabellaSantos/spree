@@ -8,7 +8,7 @@ module Spree
     let!(:duplicator) { Spree::ProductDuplicator.new(product)}
 
     let(:image) { File.open(File.expand_path('../../../fixtures/thinking-cat.jpg', __FILE__)) }
-    let(:params) { {:viewable_id => product.master.id, :viewable_type => 'Spree::Variant', :attachment => image, :alt => "position 1", :position => 1} }
+    let(:params) { {:variant_ids => product.master.id, :attachment => image, :alt => "position 1", :position => 1} }
 
     before do
       Spree::Image.create(params)
